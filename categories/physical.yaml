@@ -1,0 +1,66 @@
+properties:
+  btconly:
+    mandatory: true
+    title: "Bitcoin-only"
+    description: "Device exclusively supports Bitcoins"
+    type: "Bool"
+  multipleeditions:
+    mandatory: false
+    title: "Multiple editions"
+    description: "Device contains multiple editions"
+    type: "Bool"
+  madeby:
+    mandatory: true
+    title: "Made by"
+    descriptions: "Device is manufactured by"
+    type: "String"
+  countryoforigin:
+    mandatory: false
+    title: "Country of origin"
+    description: "Device is made by a company based in"
+    type: "String"
+  released:
+    mandatory: true
+    title: "Released in"
+    description: "Device had been released in year"
+    type: "Integer"
+  battery:
+    mandatory: true
+    title: "Battery"
+    description: "Does it have a battery?"
+    type: "Bool"
+  batterytype:
+    mandatory: false
+    title: "Battery type"
+    description: "Device has a battery type specified"
+    type: "String"
+  display:
+    mandatory: true
+    title: "Display type"
+    description: "Device contains a hardware display for showing transaction data and other information"
+    type: "StringNone"
+  inputs:
+    mandatory: false
+    title: "Input methods"
+    description: "Device contains a selection of inputs for approving transactions, inputting validation data"
+    type: "String"
+  dimensions:
+    mandatory: true
+    title: "Device diemsnions"
+    type: "Integer[]"
+    hint: "3 real numbers, signifying Width, Height, Depth/Thickness in mm"
+  displayDimensions:
+    mandatory: false
+    title: "Display dimensions"
+    type: "Integer[]"
+    hint: "2 numbers, signifying Width, Height in mm"
+  packageDimensions:
+    mandatory: false
+    title: "Dimensions of the packaging"
+    type: "Integer[]"
+    hint: "3 numbers, signifying Width, Height, Depth/Thickness"
+  packageSecure:
+    mandatory: false
+    title: "Packaging protection"
+    description: "Device packaging has security elements to prevent tampering/supply chain attacks"
+    type: "String"

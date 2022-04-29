@@ -1,0 +1,103 @@
+properties:
+  #hwselfdestruct
+  #chargingvia
+  mcu:
+    mandatory: true
+    title: "MCU/SOC"
+    description: "MCU/SOC used to power the main operations of the hardware device"
+    type: StringNone
+  mcumanufacturer:
+    mandatory: true
+    title: "MCU Vendor"
+    description: "Name of the MCU vendor"
+    type: StringNone
+  secureelement:
+    mandatory: true
+    title: "Secure Element"
+    description: "Secure Element used to securely store data in the device"
+    type: StringNone
+  secureelementmanufacturer:
+    mandatory: true
+    title: "Secure Element Vendor"
+    description: "Name of the SE vendor"
+    type: StringNone
+  openhardware:
+    mandatory: true
+    title: "Open Hardware"
+    description: "Is hardware open? (true/false)"
+    type: Bool
+  bomavailable:
+    mandatory: false
+    title: "BOM Available"
+    description: "Is Bill of Materials available?"
+    type: String
+  schematicsavailable:
+    mandatory: false
+    title: "Schematics Available"
+    description: "Are device schematics available?"
+    type: String
+  hardwarelicensing:
+    mandatory: false
+    title: "Hardware licensing"
+    description: "Under what is the hardware licensed under?"
+    type: String
+  sdcard:
+    mandatory: false
+    title: "SD Card slot"
+    description: "SD Card slot availability"
+    type: Bool
+  usbc:
+    mandatory: false
+    title: "USB-C"
+    description: "USB-C slot"
+    type: Bool
+  microusb:
+    mandatory: false
+    title: "MicroUSB"
+    description: "MicroUSB avaiability"
+    type: Bool
+  airgapped:
+    mandatory: true
+    title: "Airgapped device"
+    description: "Does the device operate as an airgapped device? Does it operate without the need of being connected to another device constantly?"
+    type: Bool
+  tethered:
+    mandatory: true
+    title: "Tethered device"
+    description: "Device requires/needs constant connection with another device (computer/phone) to operate."
+    type: String
+  remotemode:
+    mandatory: false
+    title: "Remote mode"
+    description: "Device has means of being remotely accessed without physically interacting with the device"
+    type: Bool
+  hwisupport:
+    mandatory: true
+    title: "HWI Support"
+    description: "Device supports Hardware Wallet Interface standard"
+    type: Bool
+  nfc:
+    mandatory: false
+    title: "NFC"
+    description: "Device has NFC communication support"
+    type: Bool
+  bluetooth:
+    mandatory: false
+    title: "Bluetooth"
+    description: "Device has Bluetooth support"
+    type: Bool
+  qrcode:
+    mandatory: false
+    title: "QR Code communication"
+    description: "Communication via QR codes"
+    type: Bool
+  psbt:
+    mandatory: true
+    title: "PSBT Support"
+    description: "Support for Partially Signed Bitcoin Transactions"
+    type: Bool
+  forkedhardware:
+    mandatory: false
+    title: "Hardware forked from"
+    description: "Device forks hardware specs or schematics from other older device"
+    type: String 

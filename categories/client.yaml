@@ -1,0 +1,21 @@
+properties:
+  hasclient:
+    mandatory: true
+    title: "Device client"
+    description: "Device has a made-for-the-device client"
+    type: "Bool"
+  openclient:
+    mandatory: true
+    title: "OSS Client"
+    description: "Client is open-source"
+    type: "Bool"
+  communicationapi:
+    mandatory: true
+    title: "Communication API available"
+    description: "Device has a communication API available"
+    type: "Bool"
+  independentmode:
+    mandatory: true
+    title: "Independency"
+    description: "Device can operate independently from clients (can connect to the mainnet and propagate transactions)"
+    type: "Bool"

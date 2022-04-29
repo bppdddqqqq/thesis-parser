@@ -1,0 +1,36 @@
+properties:
+  supported:
+    mandatory: true
+    title: "Still supported"
+    description: "Device is still supported by the manufacturer"
+    type: "Bool"
+  github:
+    mandatory: false
+    title: "Developer GitHub"
+    description: "Manufacturer has a GitHub available"
+    type: "Bool"
+  supportlink:
+    mandatory: false
+    title: "Support link"
+    description: "Manufacturer has a support available"
+    type: "String"
+  disclosureprogram:
+    mandatory: false
+    title: "Disclosure Program"
+    description: "Manufacturer has a Disclosure program available"
+    type: "Bool"
+  blog:
+    mandatory: false
+    title: "Developer Blog"
+    description: "Manufacturer has a Blog available"
+    type: "Bool"
+  manual:
+    mandatory: true
+    title: "Manual availability"
+    description: "Device has a manual available"
+    type: "Bool"
+  subscriptions:
+    mandatory: false
+    title: "Subscription service available"
+    description: "Device has a premium subscription service available"
+    type: "Bool"
