@@ -1,24 +1,22 @@
 import os
-from yaml import load, Loader, dump
+import yaml
 import itertools
-from Compilator.categories import get_relevant_categories
-from Compilator.data import validate
-from Compilator.schema import enabler_schema
+from Compilator.categories import CategoryManifest, Category, CategoryValue
+from Compilator.data import open_item
 from Compilator.graphs import export_all
-from Compilator.error import raise_invalids
-from Compilator.state import State
 # parse folders and find relevant files to parse
 
-def find_files_for_compilation(path, enabled_categories=set()):
+def find_files_for_compilation(path, enabled_categories=set(['default'])):
     """Iterator that returns a tuple with path and a set of categories that should be evaluated by the compilator for specified file."""
     files = os.listdir(path)
     cur_categories = enabled_categories.copy()
 
     if ('.enableCompilator' in files):
-        manifest = load(open(path+'/.enableCompilator'), Loader=Loader)
+        manifest = yaml.load(open(path+'/.enableCompilator'), Loader=yaml.Loader)
         if manifest.get("clearAll", None):
             cur_categories = set()
         else:
+            assert 'default' not in manifest['unapplyCategories']
             cur_categories.update(manifest['applyCategories'])
             cur_categories = filter(lambda x: x not in manifest['unapplyCategories'], cur_categories)
             cur_categories = set(cur_categories)
@@ -34,45 +32,22 @@ def get_files(path):
     invalid = []
     files = {}
 
-    manifest_all = set()
-    for file, manifest in find_files_for_compilation(path):
-        #print(file, manifest)
-        obj_main = load(open(file), Loader=Loader)
-        obj_main['file'] = file
-        res = validate(obj_main, manifest, invalid)
-        files[file] = obj_main
-        if files[file] is None:
-            files[file] = {}
-        manifest_all.update(manifest)
+    for path, manifests in find_files_for_compilation(path):
+        files[path] = open_item(path, manifests)
 
-    return (files, manifest_all, invalid)
+    return files
 
-def populate_fields(path= 'src/'):
+def populate_fields():
+    "OUTDATED"
     """Populate object with empty fields""" 
-    (files, manifest_all, invalid) = get_files(path)
-    for i in invalid:
-        if i[1] == "missingKeyError":
-            # (file, "typeError", missingItems)
-            for field in i[2]:
-                print(f"Added missing {field} to {i[0]}")
-                files[i[0]]['properties'][field] = None
-    if State.dry_run > 0:
-        return
-    for k, v in files.items():
-        with open(k, 'w') as output:
-            dump(v, output, default_flow_style=False)
+    pass
 
-
-def compile(path = 'src/', distpath = 'dist/'):
+def compile():
     """Compiles data"""
-    (files, manifest_all, invalid) = get_files(path)
-    if len(invalid) != 0:
-        raise_invalids(invalid)
-
+    files = get_files('src/')    
+    print(files)
     # apply graphs / known algos
-    manifest_data = get_relevant_categories(frozenset(manifest_all))
-    if State.dry_run == 0:
-        export_all(files, manifest_data)
+    export_all()
     # * maybe check if file is stale and then apply algos
      
     # merge with static files

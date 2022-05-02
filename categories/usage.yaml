@@ -3,25 +3,25 @@ properties:
     mandatory: false
     title: "Windows support"
     description: "Device has clients that can be ran on Windows"
-    type: Boolean
+    type: Bool
   macos:
     mandatory: false
     title: "macOS support"
     description: "Device has clients that can be ran on macOS"
-    type: Boolean
+    type: Bool
   linux:
     mandatory: false
     title: "Linux support"
     description: "Device has clients that can be ran on Linux"
-    type: Boolean
+    type: Bool
   ios:
     mandatory: false
     title: "iOS support"
     description: "Device has clients that can be ran on iOS"
-    type: Boolean
+    type: Bool
   android:
     mandatory: false
     title: "Android support"
     description: "Device has clients that can be ran on Android"
-    type: Boolean
+    type: Bool
 

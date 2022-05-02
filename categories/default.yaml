@@ -1,0 +1,5 @@
+properties:
+  _n:
+    mandatory: true
+    title: "Device ID/name"
+    type: "String"

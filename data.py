@@ -1,61 +1,48 @@
-from Compilator.categories import validate
-from Compilator.categories import get_relevant_categories
+from Compilator.categories import Category, CategoryValue, CategoryManifest
 from Compilator.state import State
+import yaml
 
-def valid_data_type(value, value_t):
-    if value_t == "Bool" and type(value) is bool:
-        return True
-    if value_t == "String" and type(value) is str:
-        return True
-    if value_t == "StringNone" and (type(value) is str or value is None):
-        return True
-    if value_t == "Integer" and type(value) is int:
-        return True
-    if value_t == "Integer[]" and type(value) is list and all(map(lambda x: type(x) is int, value)):
-        return True
-    return False
+def flatten_helper(lst: list):
+    for k, v in lst:
+        yield from v.categories.items()
 
-def fetch_value(obj_main: dict, key: str, value_t: str, invalid = []):
-    value = obj_main['properties'].get(key, None)
-    #print(k, t, val)
-    #if val is None:
-    #    continue
-
-    if value_t.endswith('{}'):
-        value_t = value_t[:-2]
+class DataItem:
+    def __init__(self, yaml_main: dict, manifests: set):
+        yaml_values = yaml_main.get('properties', {})
+        self.values = {}
+        self.manifests = manifests.copy()
         
-        if value is dict:
-            dct = value
-            value = dct['value']
-            if valid_data_type(value, value_t):
-                return (value, dct)
-    elif valid_data_type(value, value_t):
-        return (value,)
-    
-    if State.force > 0:
-        if (obj_main.get(key) is not None):
-            obj_main.pop(key)
-        return (None,)
+        # name of manifest, .categories=cats
+        used_manifests = filter(lambda pair: pair[0] in self.manifests, CategoryManifest.known.items())
+        self.categories = list(flatten_helper(used_manifests))
+        mandatory_categories = filter(lambda pair: pair[1].mandatory, self.categories)
 
-    error_msg = (obj_main['file'], "typeError", value, "| expected:", value_t, "on:", key)
-    if invalid is None:
-        raise ValueError(error_msg)
-    else:
-        invalid.append(error_msg)
-    return (None,)
-def validate(obj_main, manifest, invalid = []):
-    """Checks for validity of the .c.yaml file according to set categories. If the files fail to pass, it appends the data into `invalid` array argument for error handling"""
-    manifest_data = get_relevant_categories(frozenset(manifest))
-    obj = obj_main.get('properties', {})
-    obj_main['properties'] = obj
-    #check if mandatory data are filled
-    required = map(lambda kvs: kvs[0], filter(lambda kvs: kvs[1]['mandatory'] == True, manifest_data.items()))
-    s = set(required)
-    if not s.issubset(obj.keys()):
-        s -= set(obj.keys()) 
-        invalid.append((obj_main['file'], 'missingKeyError', s))
+        s = set(map(lambda x: x[0], mandatory_categories))
+        if not s.issubset(yaml_values.keys()):
+            s -= yaml_values.keys()
+            raise ValueError('requiredKeysError', s)
+        self.id = yaml_values['_n']
+        for key, value in yaml_values.items():
+            self.values[key] = CategoryValue(Category.known[key], value)
+
+    def get_by_cat(category: Category):
+        assert category in self.categories
+        assert category.key in self.values.keys()
+
+        return self.values[category.key]
     
-    #check data integrity
-    for key, value in obj_main['properties'].items():
-        fetch_value(obj_main, key, manifest_data[key]['type'], invalid)  
+    def get(key: str):
+        assert key in self.values.keys()
+
+        return self.values[key]
+
+def open_item(path: str, manifests = set()):
+    yaml_main = yaml.load(open(path), Loader=yaml.Loader)
+    
+    try:
+        res = DataItem(yaml_main, manifests)
+    except (KeyError, ValueError) as e:
+        print(path)
+        raise e
+    return res
 
