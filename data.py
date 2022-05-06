@@ -9,6 +9,7 @@ def flatten_helper(lst: list):
 
 class DataItem:
     dataItems = {}
+
     def __init__(self, yaml_main: dict, manifests: set):
         yaml_values = yaml_main.get('properties', {})
         self.values = {}
@@ -24,8 +25,14 @@ class DataItem:
             s -= yaml_values.keys()
             raise ValueError('requiredKeysError', s)
         self.id = yaml_values['_n']
+        invalid = []
         for key, value in yaml_values.items():
-            self.values[key] = CategoryValue(Category.known[key], value)
+            try:
+                self.values[key] = CategoryValue(Category.known[key], value)
+            except ValueError as e:
+                invalid.append(e)
+        if len(invalid) > 0:
+            raise ValueError('keyTypeArrayError', invalid)
         self.dataItems[self.id] = self
 
     def get_by_cat(self, category: Category):

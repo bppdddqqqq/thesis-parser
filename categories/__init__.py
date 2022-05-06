@@ -56,6 +56,7 @@ class Category:
         if not isinstance(rhs, Category):
             return False
         return self.key == rhs.key
+
 class CategoryManifest:
     known = {}
 
@@ -79,7 +80,7 @@ class CategoryValue:
             self.value = yaml_value
             self.extras = {}
         if not self.category.validate_value(self.value):
-            raise ValueError(('keyTypeError', self.value, self.category.primitive_type, self.category.title))
+            raise ValueError(('keyTypeError', self.value, self.category.primitive_type, self.category.key))
         self.category.associated_value.append(self)
     def type(self):
         return self.category.type
