@@ -46,7 +46,7 @@ properties:
     type: "String"
   dimensions:
     mandatory: true
-    title: "Device diemsnions"
+    title: "Device dimensions"
     type: "Integer[]"
     hint: "3 real numbers, signifying Width, Height, Depth/Thickness in mm"
   displayDimensions:

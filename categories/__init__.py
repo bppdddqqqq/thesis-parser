@@ -50,7 +50,12 @@ class Category:
         if self.is_array and type(value) is list:
             return all(map(lambda x: validate(self.primitive_type, x), value))
         return validate(self.primitive_type, value)
-
+    def __lt__(self, rhs):
+        return self.key < rhs.key
+    def __eq__(self, rhs):
+        if not isinstance(rhs, Category):
+            return False
+        return self.key == rhs.key
 class CategoryManifest:
     known = {}
 

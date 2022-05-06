@@ -1,12 +1,15 @@
 import os
 import yaml
+from typing import Dict
 import itertools
 from Compilator.categories import CategoryManifest, Category, CategoryValue
-from Compilator.data import open_item
+from Compilator.data import open_item, DataItem
 from Compilator.graphs import export_all
+from Compilator.tables import export_table
+from Compilator.markdown import markdown_compiler
 # parse folders and find relevant files to parse
 
-def find_files_for_compilation(path, enabled_categories=set(['default'])):
+def find_cfiles_for_compilation(path, enabled_categories=set(['default'])):
     """Iterator that returns a tuple with path and a set of categories that should be evaluated by the compilator for specified file."""
     files = os.listdir(path)
     cur_categories = enabled_categories.copy()
@@ -23,16 +26,16 @@ def find_files_for_compilation(path, enabled_categories=set(['default'])):
     for file in files:
         new_path = path + '/' + file
         if os.path.isdir(new_path):
-            yield from find_files_for_compilation(new_path, cur_categories)
+            yield from find_cfiles_for_compilation(new_path, cur_categories)
         elif os.path.isfile(new_path):
             if (len(enabled_categories) != 0 and file.endswith('.c.yaml')):
                 yield (new_path, cur_categories)
 
-def get_files(path):
+def get_files(path) -> Dict[str, DataItem]:
     invalid = []
     files = {}
 
-    for path, manifests in find_files_for_compilation(path):
+    for path, manifests in find_cfiles_for_compilation(path):
         files[path] = open_item(path, manifests)
 
     return files
@@ -45,11 +48,16 @@ def populate_fields():
 def compile():
     """Compiles data"""
     files = get_files('src/')    
-    print(files)
-    # apply graphs / known algos
     export_all()
-    # * maybe check if file is stale and then apply algos
-     
-    # merge with static files
+    print('Printing main table')
+    export_table()
+    
+    print('Compiling markdown files...')
+    markdown_compiler()
 
-    # output to dist dir
+    print('Generating autodocs')
+    os.makedirs('dist/autogen', exist_ok=True)
+    for i in files.values():
+        print(f'{i.id}.md ...')
+        i.dump_md(f'dist/autogen/{i.id}.md')
+
