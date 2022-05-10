@@ -30,12 +30,12 @@ properties:
     mandatory: false
     title: "BOM Available"
     description: "Is Bill of Materials available?"
-    type: String
+    type: Link
   schematicsavailable:
     mandatory: false
     title: "Schematics Available"
     description: "Are device schematics available?"
-    type: String
+    type: Link
   hardwarelicensing:
     mandatory: false
     title: "Hardware licensing"

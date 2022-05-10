@@ -49,16 +49,16 @@ properties:
     title: "Device dimensions"
     type: "Integer[]"
     hint: "3 real numbers, signifying Width, Height, Depth/Thickness in mm"
-  displayDimensions:
-    mandatory: false
-    title: "Display dimensions"
-    type: "Integer[]"
-    hint: "2 numbers, signifying Width, Height in mm"
-  packageDimensions:
-    mandatory: false
-    title: "Dimensions of the packaging"
-    type: "Integer[]"
-    hint: "3 numbers, signifying Width, Height, Depth/Thickness"
+      #  displayDimensions:
+      #mandatory: false
+      #title: "Display dimensions"
+      #type: "Integer[]"
+      #hint: "2 numbers, signifying Width, Height in mm"
+      #packageDimensions:
+      #mandatory: false
+      #title: "Dimensions of the packaging"
+      #type: "Integer[]"
+      #hint: "3 numbers, signifying Width, Height, Depth/Thickness"
   packageSecure:
     mandatory: false
     title: "Packaging protection"

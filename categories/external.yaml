@@ -8,29 +8,29 @@ properties:
     mandatory: false
     title: "Developer GitHub"
     description: "Manufacturer has a GitHub available"
-    type: "Bool"
+    type: "Link"
   supportlink:
     mandatory: false
     title: "Support link"
     description: "Manufacturer has a support available"
-    type: "String"
+    type: "Link"
   disclosureprogram:
     mandatory: false
     title: "Disclosure Program"
     description: "Manufacturer has a Disclosure program available"
-    type: "Bool"
+    type: "Link"
   blog:
     mandatory: false
     title: "Developer Blog"
     description: "Manufacturer has a Blog available"
-    type: "Bool"
+    type: "Link"
   manual:
     mandatory: true
     title: "Manual availability"
     description: "Device has a manual available"
-    type: "Bool"
-  subscriptions:
+    type: "Link"
+  subscription:
     mandatory: false
     title: "Subscription service available"
     description: "Device has a premium subscription service available"
-    type: "Bool"
+    type: "Link"

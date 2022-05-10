@@ -4,7 +4,9 @@ import os
 import re
 import itertools
 
-base_types = ['Bool', 'String', 'StringNone', 'Integer', 'IntegerNone']
+import validators
+
+base_types = ['Bool', 'String', 'StringNone', 'Integer', 'IntegerNone', 'Link']
 
 type_glob = re.compile(r"^([A-Z][A-Za-z]*)(\[\])?(\{\})?$")
 
@@ -21,6 +23,8 @@ def validate(primitive_type, value):
     if primitive_type == "Integer" and type(value) is int:
         return True
     if primitive_type == "IntegerNone" and (type(value) is int or value is None):
+        return True
+    if primitive_type == "Link" and (value is None or (type(value) is str and validators.url(value))):
         return True
     return False
 

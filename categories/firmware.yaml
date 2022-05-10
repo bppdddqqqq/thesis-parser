@@ -1,0 +1,26 @@
+properties:
+  firmwaregithub:
+    mandatory: false
+    type: Link
+    title: "Firmware repository"
+    description: "Device has it's firmware available on a repository like GitHub, GitLab, etc."
+  firmwareforked:
+    mandatory: false
+    type: String
+    title: "Firmware forked from"
+    description: "Device has it's firmware based on another firmware or suite"
+  firmwarelicense:
+    mandatory: false
+    type: String
+    title: "Firmware licensing"
+    description: "Device firmware is licensed under"
+  firmwarecomplete:
+    mandatory: false
+    type: Bool
+    title: "Firmware is untrucated"
+    description: "Device firmware doesn't have parts of the source code hidden under an NDA, or other circumstances"
+  firmwarelanguages:
+    mandatory: false
+    type: String[]
+    title: "Firmware coded in"
+    description: "Device firmware is coded in languages specified"
