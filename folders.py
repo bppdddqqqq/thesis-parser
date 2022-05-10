@@ -33,12 +33,10 @@ def find_cfiles_for_compilation(path, enabled_categories=set(['default'])):
                 yield (new_path, cur_categories)
 
 def get_files(path) -> Dict[str, DataItem]:
-    invalid = []
     files = {}
 
     for path, manifests in find_cfiles_for_compilation(path):
         files[path] = open_item(path, manifests)
-    raise_invalids()
     return files
 
 def populate_fields():
@@ -46,9 +44,15 @@ def populate_fields():
     """Populate object with empty fields""" 
     pass
 
+def test():
+    """Pass validation checks"""
+    files = get_files('src/')
+    raise_invalids()
+
 def compile():
     """Compiles data"""
-    files = get_files('src/')    
+    files = get_files('src/')
+    raise_invalids()    
     export_all()
     print('Printing main table')
     export_table()
