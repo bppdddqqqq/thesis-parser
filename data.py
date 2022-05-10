@@ -1,7 +1,7 @@
 from Compilator.categories import Category, CategoryValue, CategoryManifest
 from Compilator.state import State
 import yaml
-import typing
+import Compilator.error as error
 
 def flatten_helper(lst: list):
     for k, v in lst:
@@ -31,7 +31,9 @@ class DataItem:
                 self.values[key] = CategoryValue(Category.known[key], value)
             except ValueError as e:
                 invalid.append(e)
+        self.bad = False
         if len(invalid) > 0:
+            self.bad = True
             raise ValueError('keyTypeArrayError', invalid)
         self.dataItems[self.id] = self
 
@@ -60,13 +62,15 @@ class DataItem:
                         fp.write(f'* {k} :: {v}\n')
                 fp.write('\n\n')
 
+    def dumps(self):
+        return {'properties': {k: v.dumps() for k, v in self.values.items()}}
+
 def open_item(path: str, manifests = set()) -> DataItem:
     yaml_main = yaml.load(open(path), Loader=yaml.Loader)
     
     try:
         res = DataItem(yaml_main, manifests)
+        return res
     except (KeyError, ValueError) as e:
-        print(path)
-        raise e
-    return res
+        error.InvalidList.push(('fileError', path, e))
 

@@ -24,8 +24,14 @@ def validate(primitive_type, value):
         return True
     if primitive_type == "IntegerNone" and (type(value) is int or value is None):
         return True
-    if primitive_type == "Link" and (value is None or (type(value) is str and validators.url(value))):
-        return True
+    if primitive_type == "Link":
+        if value is None:
+            return True
+        try:
+            if type(value) is str and validators.url(value):        
+                return True
+        except:
+            return False
     return False
 
 class Category:
@@ -88,6 +94,13 @@ class CategoryValue:
         self.category.associated_value.append(self)
     def type(self):
         return self.category.type
+    def dumps(self):
+        if (self.extras == {}):
+            return self.value
+        return {
+            '_v': self.value,
+            **self.extras
+        }
     def __del__(self):
         self.category.associated_value.remove(self)
 

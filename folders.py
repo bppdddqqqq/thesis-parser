@@ -7,6 +7,7 @@ from Compilator.data import open_item, DataItem
 from Compilator.graphs import export_all
 from Compilator.tables import export_table
 from Compilator.markdown import markdown_compiler
+from Compilator.error import raise_invalids
 # parse folders and find relevant files to parse
 
 def find_cfiles_for_compilation(path, enabled_categories=set(['default'])):
@@ -37,7 +38,7 @@ def get_files(path) -> Dict[str, DataItem]:
 
     for path, manifests in find_cfiles_for_compilation(path):
         files[path] = open_item(path, manifests)
-
+    raise_invalids()
     return files
 
 def populate_fields():
