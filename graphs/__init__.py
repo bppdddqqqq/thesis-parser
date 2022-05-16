@@ -11,6 +11,7 @@ def transform_to_percentages(array):
     s = sum(array)
     return list(map(lambda x: round(((x*1.0)/s)*100, 1), array))
 
+# used example code from plotly examples
 def summarised_graph_bool(bool_graph_data):
     top_labels = ['True', 'False']
     

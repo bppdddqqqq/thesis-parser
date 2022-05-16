@@ -1,6 +1,9 @@
 import os
 import re
+from Compilator.categories import CategoryValue
 from Compilator.data import DataItem
+
+
 def markdown_files_iterator(path = 'src/'):
     files = os.listdir(path)
 
@@ -37,9 +40,12 @@ def markdown_functions_finder():
                 md_new.write(buf)
 
 def markdown_get(key, category):
-    item = DataItem.dataItems[key]
+    item : DataItem = DataItem.dataItems[key]
 
-    return item.values.get(category, 'N/A')
+    res : CategoryValue = item.values.get(category, None)
+    if res is None:
+        return 'N/A'
+    return str(res.value)
 commands = {'markdown_get': markdown_get}
 
 def markdown_compiler():

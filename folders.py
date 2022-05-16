@@ -44,11 +44,6 @@ def populate_fields():
     """Populate object with empty fields""" 
     pass
 
-def test():
-    """Pass validation checks"""
-    files = get_files('src/')
-    raise_invalids()
-
 def compile():
     """Compiles data"""
     files = get_files('src/')
@@ -66,3 +61,8 @@ def compile():
         print(f'{i.id}.md ...')
         i.dump_md(f'dist/autogen/{i.id}.md')
 
+def dryrun():
+    """Compiles data"""
+    get_files('src/')
+    raise_invalids()   
+    print('All fields are valid!')
