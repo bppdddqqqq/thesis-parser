@@ -58,8 +58,8 @@ def compile():
     print('Generating autodocs')
     os.makedirs('dist/autogen', exist_ok=True)
     for i in files.values():
-        print(f'{i.id}.md ...')
-        i.dump_md(f'dist/autogen/{i.id}.md')
+        print(f'_{i.id}.md ...')
+        i.dump_md(f'dist/autogen/_{i.id}.md')
 
 def dryrun():
     """Compiles data"""
