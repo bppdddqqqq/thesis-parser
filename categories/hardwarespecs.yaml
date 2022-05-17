@@ -21,45 +21,40 @@ properties:
     title: "Secure Element Vendor"
     description: "Name of the SE vendor"
     type: StringNone
-  openhardware:
-    mandatory: true
-    title: "Open Hardware"
-    description: "Is hardware open? (true/false)"
-    type: Bool
   bomavailable:
     mandatory: false
     title: "BOM Available"
-    description: "Is Bill of Materials available?"
+    description: "Device hardware's Bill of Materials is available under this link"
     type: Link
   schematicsavailable:
     mandatory: false
     title: "Schematics Available"
-    description: "Are device schematics available?"
+    description: "Device schematics are available under this link"
     type: Link
   hardwarelicensing:
     mandatory: false
     title: "Hardware licensing"
-    description: "Under what is the hardware licensed under?"
+    description: "Device hardware is licensed under"
     type: String
   sdcard:
     mandatory: false
     title: "SD Card slot"
-    description: "SD Card slot availability"
+    description: "Device has an SD Card slot available"
     type: Bool
   usbc:
     mandatory: false
     title: "USB-C"
-    description: "USB-C slot"
+    description: "Device offers USB-C connectivity"
     type: Bool
   microusb:
     mandatory: false
     title: "MicroUSB"
-    description: "MicroUSB avaiability"
+    description: "Device offers MicroUSB connectivity"
     type: Bool
   airgapped:
     mandatory: true
     title: "Airgapped device"
-    description: "Does the device operate as an airgapped device? Does it operate without the need of being connected to another device constantly?"
+    description: "Device is able to communicate without "
     type: Bool
   tethered:
     mandatory: true
@@ -84,17 +79,37 @@ properties:
   bluetooth:
     mandatory: false
     title: "Bluetooth"
-    description: "Device has Bluetooth support"
+    description: "Device has Bluetooth"
     type: Bool
   qrcode:
     mandatory: false
     title: "QR Code communication"
-    description: "Communication via QR codes"
+    description: "Device uses QR codes for communication"
     type: Bool
   psbt:
     mandatory: true
     title: "PSBT Support"
-    description: "Support for Partially Signed Bitcoin Transactions"
+    description: "Device supports Partially Signed Bitcoin Transactions"
+    type: Bool
+  segwit:
+    mandatory: true
+    title: "SegWit Support"
+    description: "Device supports SegWit specification"
+    type: Bool
+  taproot:
+    mandatory: true
+    title: "Taproot Support"
+    description: "Device supports Taproot specification"
+    type: Bool
+  lighting:
+    mandatory: true
+    title: "Lighting Network support"
+    description: "Device supports Lighting network specification"
+    type: Bool
+  bitcoinonlyfirmware:
+    mandatory: true
+    title: "Bitcoin-only firmware availability"
+    description: "Device offers Bitcoin-only firmware"
     type: Bool
   forkedhardware:
     mandatory: false

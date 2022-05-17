@@ -27,6 +27,8 @@ class DataItem:
         self.id = yaml_values['_n']
         invalid = []
         for key, value in yaml_values.items():
+            if key not in Category.known.keys():
+                continue
             try:
                 self.values[key] = CategoryValue(Category.known[key], value)
             except ValueError as e:
