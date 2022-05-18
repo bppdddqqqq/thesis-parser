@@ -1,3 +1,8 @@
+from ctypes import Union
+from tokenize import String
+from typing import Dict
+from typing_extensions import Self
+import pandas
 import yaml
 import os
 
@@ -35,7 +40,7 @@ def validate(primitive_type, value):
     return False
 
 class Category:
-    known = {}
+    known : Dict[str, Self] = {}
     def __init__(self, key, yaml_sub):
         self.mandatory = yaml_sub['mandatory']
         self.title = yaml_sub['title']
@@ -110,6 +115,25 @@ def load_file(file):
 
 def list_categories():
     return filter(lambda x: x.endswith('.yaml'), os.listdir(CATEGORIES_LOCATION))
+
+def get_category_info(key: str) -> String:
+    if key == '_ALL':
+        pandas.set_option('display.max_colwidth', None)
+        table = pandas.DataFrame()
+
+        for k,v in Category.known.items():
+            table.at[k, 'Title'] = v.title
+            table.at[k, 'Description'] = v.description
+            table.at[k, 'Type'] = v.type
+        
+        return table.to_markdown()
+
+    cat : Category = Category.known.get(key, None)
+
+    if cat is None:
+        return "No such category"
+    
+    return f"{cat.title} - {cat.description} - {cat.type}"
 
 def init_script():
     global INITTED

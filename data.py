@@ -56,8 +56,8 @@ class DataItem:
             for key, cat in self.values.items():
                 fp.write(f'## {cat.category.title}\n')
                 if cat.category.description:
-                    fp.write(f'{cat.category.description}\n')
-                fp.write(f'Value: {cat.value}\n')
+                    fp.write(f'{cat.category.description}\n\n')
+                fp.write(f'Value: {cat.value}\n\n')
                 if cat.extras:
                     fp.write('Extra values:\n')
                     for k, v in cat.extras.items():
