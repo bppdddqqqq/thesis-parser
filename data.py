@@ -18,7 +18,7 @@ class DataItem:
         # name of manifest, .categories=cats
         used_manifests = filter(lambda pair: pair[0] in self.manifests, CategoryManifest.known.items())
         self.categories = list(flatten_helper(used_manifests))
-        mandatory_categories = filter(lambda pair: True or pair[1].mandatory, self.categories)
+        mandatory_categories = filter(lambda pair: pair[1].mandatory, self.categories)
 
         s = set(map(lambda x: x[0], mandatory_categories))
         if not s.issubset(yaml_values.keys()):
