@@ -36,13 +36,23 @@ properties:
     type: "String"
   display:
     mandatory: true
-    title: "Display type"
+    title: "Display"
     description: "Device contains a hardware display for showing transaction data and other information"
     type: "StringNone"
+  displaytype:
+    mandatory: true
+    title: "Display type"
+    description: "Device has a display of specified type"
+    type: "String"
   inputs:
     mandatory: false
-    title: "Input methods"
+    title: "Input options"
     description: "Device contains a selection of inputs for approving transactions, inputting validation data"
+    type: "String"
+  inputtype:
+    mandatory: false
+    title: "Input method"
+    description: "Device contains specified input method"
     type: "String"
   dimensions:
     mandatory: true

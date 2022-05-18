@@ -8,6 +8,7 @@ from Compilator.graphs import export_all
 from Compilator.tables import export_table
 from Compilator.markdown import markdown_compiler
 from Compilator.error import raise_invalids
+from Compilator.tables import fetch_table
 # parse folders and find relevant files to parse
 
 def find_cfiles_for_compilation(path, enabled_categories=set(['default'])):
@@ -39,10 +40,21 @@ def get_files(path) -> Dict[str, DataItem]:
         files[path] = open_item(path, manifests)
     return files
 
-def populate_fields():
-    "OUTDATED"
-    """Populate object with empty fields""" 
-    pass
+def get_device_catalogue():
+    files = get_files('src/')
+    raise_invalids()    
+    table = fetch_table()
+
+    table = table.filter(items=['released', 'madeby']).sort_values(by=['released'])
+    print(table.to_markdown())
+
+def get_bip_support():
+    files = get_files('src/')
+    raise_invalids()    
+    table = fetch_table()
+
+    table = table.filter(items=['psbt', 'segwit', 'taproot', 'released']).sort_values(by=['released'])
+    print(table.to_markdown())
 
 def compile():
     """Compiles data"""

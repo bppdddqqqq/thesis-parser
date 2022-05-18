@@ -9,11 +9,10 @@ def fetch_cats():
     all_cats = filter(trunc_hidden, Category.known.values())
     return all_cats
 
-@functools.lru_cache()
-def fetch_table():
+def fetch_table(dataItems = DataItem.dataItems):
     all_cats = fetch_cats()
-    table = pd.DataFrame(index=DataItem.dataItems.keys(), columns=list(map(lambda x: x.key, all_cats)))
-    for k,v in DataItem.dataItems.items():
+    table = pd.DataFrame(index=dataItems.keys(), columns=list(map(lambda x: x.key, all_cats)))
+    for k,v in dataItems.items():
         for cat in all_cats:
             table.at[k,cat.key] = 'N/A'
 
