@@ -4,27 +4,27 @@ properties:
   mcu:
     mandatory: true
     title: "MCU/SOC"
-    description: "MCU/SOC used to power the main operations of the hardware device"
+    description: "Device uses MCU/SOC specified"
     type: StringNone
   mcumanufacturer:
     mandatory: true
     title: "MCU Vendor"
-    description: "Name of the MCU vendor"
+    description: "Device MCU is manufactured by"
     type: StringNone
   secureelement:
     mandatory: true
     title: "Secure Element"
-    description: "Secure Element used to securely store data in the device"
+    description: "Device uses SE specified"
     type: StringNone
   secureelementmanufacturer:
     mandatory: true
     title: "Secure Element Vendor"
-    description: "Name of the SE vendor"
+    description: "Device SE is manufactured by"
     type: StringNone
   bomavailable:
     mandatory: false
     title: "BOM Available"
-    description: "Device hardware's Bill of Materials is available under this link"
+    description: "Device's Bill of Materials is available under this link"
     type: Link
   schematicsavailable:
     mandatory: false

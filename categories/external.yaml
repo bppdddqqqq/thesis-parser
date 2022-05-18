@@ -2,27 +2,27 @@ properties:
   supported:
     mandatory: true
     title: "Still supported"
-    description: "Device is still supported by the manufacturer"
+    description: "Device is still supported by the vendor"
     type: "Bool"
   github:
     mandatory: false
     title: "Developer GitHub"
-    description: "Manufacturer has a GitHub available"
+    description: "Device vendor has a GitHub available"
     type: "Link"
   supportlink:
     mandatory: false
     title: "Support link"
-    description: "Manufacturer has a support available"
+    description: "Device vendor has a support available"
     type: "Link"
   disclosureprogram:
     mandatory: false
     title: "Disclosure Program"
-    description: "Manufacturer has a Disclosure program available"
+    description: "Device vendor has a Disclosure program available"
     type: "Link"
   blog:
     mandatory: false
     title: "Developer Blog"
-    description: "Manufacturer has a Blog available"
+    description: "Device vendor has a Blog available"
     type: "Link"
   manual:
     mandatory: true

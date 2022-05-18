@@ -12,7 +12,7 @@ properties:
   madeby:
     mandatory: true
     title: "Made by"
-    descriptions: "Device is manufactured by"
+    description: "Device is manufactured by"
     type: "String"
   countryoforigin:
     mandatory: false
@@ -23,11 +23,11 @@ properties:
     mandatory: true
     title: "Released in"
     description: "Device had been released in year"
-    type: "Integer"
+    type: "IntegerNone"
   battery:
     mandatory: true
     title: "Battery"
-    description: "Does it have a battery?"
+    description: "Device contains a battery"
     type: "Bool"
   batterytype:
     mandatory: false
@@ -47,6 +47,7 @@ properties:
   dimensions:
     mandatory: true
     title: "Device dimensions"
+    description: "Device has set dimensions"
     type: "Integer[]"
     hint: "3 real numbers, signifying Width, Height, Depth/Thickness in mm"
       #  displayDimensions:

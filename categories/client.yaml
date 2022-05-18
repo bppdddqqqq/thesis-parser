@@ -7,7 +7,7 @@ properties:
   openclient:
     mandatory: true
     title: "OSS Client"
-    description: "Client is open-source"
+    description: "Device client is open-source"
     type: "Bool"
   communicationapi:
     mandatory: true
